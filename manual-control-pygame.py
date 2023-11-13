@@ -124,21 +124,21 @@ class FrontEnd(object):
         参数：
             key：pygame事件循环中的键事件
         """
-        if key == pygame.K_UP:  # set forward velocity
+        if key == pygame.K_i:  # set forward velocity
             self.for_back_velocity = S
-        elif key == pygame.K_DOWN:  # set backward velocity
+        elif key == pygame.K_m:  # set backward velocity
             self.for_back_velocity = -S
-        elif key == pygame.K_LEFT:  # set left velocity
+        elif key == pygame.K_j:  # set left velocity
             self.left_right_velocity = -S
-        elif key == pygame.K_RIGHT:  # set right velocity
+        elif key == pygame.K_k:  # set right velocity
             self.left_right_velocity = S
         elif key == pygame.K_w:  # set up velocity
             self.up_down_velocity = S
-        elif key == pygame.K_s:  # set down velocity
+        elif key == pygame.K_z:  # set down velocity
             self.up_down_velocity = -S
         elif key == pygame.K_a:  # set yaw counter clockwise velocity
             self.yaw_velocity = -S
-        elif key == pygame.K_d:  # set yaw clockwise velocity
+        elif key == pygame.K_s:  # set yaw clockwise velocity
             self.yaw_velocity = S
 
     def keyup(self, key):
@@ -150,18 +150,18 @@ class FrontEnd(object):
         参数：
             key：pygame事件循环中的键事件
         """
-        if key == pygame.K_UP or key == pygame.K_DOWN:  # set zero forward/backward velocity
+        if key == pygame.K_i or key == pygame.K_m:  # set zero forward/backward velocity
             self.for_back_velocity = 0
-        elif key == pygame.K_LEFT or key == pygame.K_RIGHT:  # set zero left/right velocity
+        elif key == pygame.K_j or key == pygame.K_k:  # set zero left/right velocity
             self.left_right_velocity = 0
-        elif key == pygame.K_w or key == pygame.K_s:  # set zero up/down velocity
+        elif key == pygame.K_w or key == pygame.K_z:  # set zero up/down velocity
             self.up_down_velocity = 0
-        elif key == pygame.K_a or key == pygame.K_d:  # set zero yaw velocity
+        elif key == pygame.K_a or key == pygame.K_s:  # set zero yaw velocity
             self.yaw_velocity = 0
-        elif key == pygame.K_t:  # takeoff
+        elif key == pygame.K_q:  # takeoff
             self.tello.takeoff()
             self.send_rc_control = True
-        elif key == pygame.K_l:  # land
+        elif key == pygame.K_p:  # land
             not self.tello.land()
             self.send_rc_control = False
 
