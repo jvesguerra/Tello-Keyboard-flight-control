@@ -47,24 +47,6 @@ class FrontEnd(object):
 
         frame_read = self.tello.get_frame_read()
 
-        up_button = button(200, 450, image=pygame.image.load("images/W.png"))
-        down_button = button(200, 650, image=pygame.image.load("images/Z.png"))
-        rot_left_button = button(100, 550, image=pygame.image.load("images/A.png"))
-        rot_right_button = button(300, 550, image=pygame.image.load("images/S.png"))
-        forward_button = button(750, 450, image=pygame.image.load("images/I.png"))
-        backward_button = button(750, 650, image=pygame.image.load("images/M.png"))
-        left_button = button(650, 550, image=pygame.image.load("images/J.png"))
-        right_button = button(850, 550, image=pygame.image.load("images/K.png"))
-        takeoff_button = button(75, 100, image=pygame.image.load("images/Q.png"))
-        land_button = button(75, 220, image=pygame.image.load("images/P.png"))
-
-        for buttons in [up_button, down_button,
-                        rot_left_button, rot_right_button,
-                        forward_button, backward_button,
-                        left_button, right_button,
-                        takeoff_button, land_button]:
-            buttons.update(self.screen)
-
         should_stop = False
         while not should_stop:
             for event in pygame.event.get():
@@ -80,6 +62,19 @@ class FrontEnd(object):
                 elif event.type == pygame.KEYUP:
                     self.keyup(event.key)
 
+            up_button = button(200, 450, image=pygame.image.load("images/W.png"))
+            down_button = button(200, 650, image=pygame.image.load("images/Z.png"))
+            rot_left_button = button(100, 550, image=pygame.image.load("images/A.png"))
+            rot_right_button = button(300, 550, image=pygame.image.load("images/S.png"))
+            forward_button = button(750, 450, image=pygame.image.load("images/I.png"))
+            backward_button = button(750, 650, image=pygame.image.load("images/M.png"))
+            left_button = button(650, 550, image=pygame.image.load("images/J.png"))
+            right_button = button(850, 550, image=pygame.image.load("images/K.png"))
+            takeoff_button = button(75, 100, image=pygame.image.load("images/Q.png"))
+            land_button = button(75, 220, image=pygame.image.load("images/P.png"))
+
+
+
             if frame_read.stopped:
                 break
 
@@ -91,7 +86,7 @@ class FrontEnd(object):
             text = "Battery: {}%".format(self.tello.get_battery())
             cv2.putText(frame,
                         text,
-                        (5, 720 - 5),
+                        (750, 50),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         1,
                         (0, 0, 255),
@@ -102,6 +97,12 @@ class FrontEnd(object):
 
             frame = pygame.surfarray.make_surface(frame)
             self.screen.blit(frame, (0, 0))
+            for buttons in [up_button, down_button,
+                            rot_left_button, rot_right_button,
+                            forward_button, backward_button,
+                            left_button, right_button,
+                            takeoff_button, land_button]:
+                buttons.update(self.screen)
             pygame.display.update()
 
             time.sleep(1 / FPS)
