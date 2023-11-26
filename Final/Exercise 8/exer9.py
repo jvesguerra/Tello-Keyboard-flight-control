@@ -195,7 +195,7 @@ class FrontEnd(object):
         else:
             return img,[[0,0],0]
 
-    def trackFace(self,myDrone,info,w,pid,pError):
+    def trackFace(self,info,w,pid,pError):
 
         area = info[1]
         x,y = info[0]
@@ -216,7 +216,7 @@ class FrontEnd(object):
             speed = 0
             error = 0
 
-        myDrone.send_rc_control(0,fb, 0, speed)
+        self.send_rc_control(0,fb, 0, speed)
 
         return error
 
