@@ -171,7 +171,7 @@ class FrontEnd(object):
             self.yaw_velocity = S
         elif key == pygame.K_f:  # start face tracking
            self.toggleFaceTracking()
-        elif key == pygame.K_f:  # start line following
+        elif key == pygame.K_l:  # start line following
            self.toggleLineFollowing()
 
 
