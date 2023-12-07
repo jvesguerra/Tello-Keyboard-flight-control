@@ -11,16 +11,16 @@ S = 60
 # A low number also results in input lag, as input information is processed once per frame.
 FPS = 120
 
-w, h = 960, 640
+w, h = 960, 720
 fbRange = [25000, 35000]
 pid = [0.4, 0.4, 0]
 pError = 0
 isFollowingFace = False
 
-hsvVals = [0,0,117,179,22,219] #will change depending on the color picker
+hsvVals = [0,0,89, 179, 255, 255] #will change depending on the color picker
 sensors = 3 #width of the image should be divisible by the value of sensor
 threshold = 0.2
-width, height = 480, 360 #change this
+width, height = 960, 720 #change this
 sensitivity = 3 #if number is high, then less sensitive
 weigths = [-25, -15, 0, 15, 25]
 curve = 0
@@ -100,6 +100,7 @@ class FrontEnd(object):
             self.screen.fill([0, 0, 0])
 
             frame = frame_read.frame
+            # print(frame.shape[0], frame.shape[1])
 
             # battery
             text = "Battery: {}%".format(self.tello.get_battery())
@@ -121,7 +122,7 @@ class FrontEnd(object):
                 pError = self.trackFace(info, w, pid, pError)
             
             if self.line_following_active:
-                imagee = cv2.flip(frame)
+                imagee = cv2.flip(frame,0)
                 imageThres = self.thresholding(imagee)
                 cx = self.getContours(imageThres,imagee)
                 senOut = self.getSensorOutput(imageThres, sensors)
@@ -248,7 +249,7 @@ class FrontEnd(object):
             fb = -60
         elif area < fbRange[0] and area != 0:
             fb = 60
-
+      
         if x == 0:
             speed = 0
             error = 0
@@ -273,7 +274,7 @@ class FrontEnd(object):
     def getContours(self, imgThreshold, img):
         cx = 0
         contours, hierarchy = cv2.findContours(imgThreshold, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-        if len(contours != 0):
+        if len(contours) != 0:
             biggest = max(contours, key = cv2.contourArea)
             x,y,w,h = cv2.boundingRect(biggest)
             cx = x + w//2
